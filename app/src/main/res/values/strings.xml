@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">CameraOpenCV</string>
+    <string name="title_activity_camera_view">CameraView</string>
+    <string name="tag">CAMERA_OPEN_CV</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="welcome">Welcome</string>
+    <string name="bio_eye_user">BioEye User</string>
+    <string name="small_demo">A Small Demo of our \nFace Recognition technology.</string>
+    <string name="launch_face_detector">Launch Face Detector </string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="perform_test">Perform the test in a dimly lit room</string>
+    <string name="adjust_lighting">Please adjust the lighting </string>
+    <string name="try_again">Try Again</string>
+    <string name="session_summary">Session Summary</string>
+    <string name="start_over">Start Over</string>
+    <string name="total">Total Frames</string>
+    <string name="detected">Face Detected</string>
+    <string name="no_face">No Face</string>
+    <string name="done">DONE</string>
+    <string name="filename_format">yyyy-MM-dd-HH-mm-ss-SSS</string>
+</resources>
