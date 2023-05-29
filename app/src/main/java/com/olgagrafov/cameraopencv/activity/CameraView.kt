@@ -40,8 +40,10 @@ class CameraView : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Load Open CV SDK
         System.loadLibrary("opencv_java4")
 
+        //this hardcode is a temp data for create the next Summary window
         val face = com.olgagrafov.cameraopencv.model.Face(true)
         val falseFace = com.olgagrafov.cameraopencv.model.Face(false)
         val faces = ArrayList<com.olgagrafov.cameraopencv.model.Face>()
@@ -71,6 +73,7 @@ class CameraView : ComponentActivity() {
 
             CameraOpenCVTheme {
                 if (shouldShowCamera.value) {
+                    //The first screen show camera
                     CameraView(
                         outputDirectory = outputDirectory,
                         executor = cameraExecutor,
@@ -83,8 +86,10 @@ class CameraView : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
                     ) {
+                        //The next Summary screen will be displayed if we get an image and click "done" or the camera closes after 0.5 minutes
                         if (showSessionSummary || (!::imageBitmap.isInitialized))
                            SessionSummary(this, sTotal, sDetected, sNoDetected)
+                        //The photo will be displayed on the photo screen if we make one
                         else
                             PhotoView(
                                 photoBitmap = imageBitmap,
@@ -99,6 +104,7 @@ class CameraView : ComponentActivity() {
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
+    //Timer runs for 0.5 minutes, then camera closes
     private fun startTimer() {
         val scope = CoroutineScope(Dispatchers.Main)
         scope.launch {
@@ -149,6 +155,7 @@ class CameraView : ComponentActivity() {
         return bitmap
     }
 
+    //It's fun to convert a photo from an image to a CV using OpenCV SDK
     private fun convertBitmapToMat(bitmap: Bitmap) {
         val mat = Mat(bitmap.height, bitmap.width, CvType.CV_8UC1)
         Utils.bitmapToMat(bitmap, mat)

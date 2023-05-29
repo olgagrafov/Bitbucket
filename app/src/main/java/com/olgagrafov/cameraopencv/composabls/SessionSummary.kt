@@ -66,7 +66,7 @@ fun SessionSummary(
                     onClick = { (context as Activity).finish() },
                     shape = RoundedCornerShape(15.dp),
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                    modifier = Modifier.width(265.dp).height(65.dp)
+                    modifier = Modifier.width(265.dp).height(65.dp).padding(bottom = 5.dp)
                 ) {
                     Text(
                         text = context.getString(R.string.start_over),
