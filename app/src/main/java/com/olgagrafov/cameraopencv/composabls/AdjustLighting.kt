@@ -30,34 +30,33 @@ fun AdjustLighting(
             Text(
                 text = context.getString(R.string.perform_test),
                 style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(24.dp)
             )
             Text(
-                text = context.getString(R.string.adjust_lighting),
-                style = MaterialTheme.typography.subtitle2,
-                modifier = Modifier.padding(24.dp) //, start = 24.dpend = 24.dp,top = 20.dp, bottom = 50.dp))
+               text = context.getString(R.string.adjust_lighting),
+               style = MaterialTheme.typography.subtitle2,
+               modifier = Modifier.padding(top = 24.dp, bottom = 70.dp)
             )
             Image(
                 painter = painterResource(id = R.drawable.home),
                 contentDescription = "",
-                modifier = Modifier.width(400.dp).height(270.dp).padding(top = 50.dp)
+                modifier = Modifier.width(298.dp).height(205.dp)
             )
-            Row(
-                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.Center
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth().fillMaxHeight().padding(bottom = 5.dp),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(
+                onClick = { windowSwitch.value = MAIN_WINDOW },
+                shape = RoundedCornerShape(15.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
+                modifier = Modifier.width(265.dp).height(65.dp)
             ) {
-                Button(
-                    onClick = { windowSwitch.value = MAIN_WINDOW },
-                    shape = RoundedCornerShape(20.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                    modifier = Modifier.width(354.dp).height(88.dp).padding(start = 24.dp)
-                ) {
-                    Text(
-                        text = context.getString(R.string.try_again),
-                        style = MaterialTheme.typography.button
-                    )
-                }
+                Text(
+                    text = context.getString(R.string.try_again),
+                    style = MaterialTheme.typography.button
+                )
             }
         }
     }

@@ -147,16 +147,16 @@ fun MainContent(
                 contentDescription = "",
                 modifier = Modifier
                     .wrapContentSize(Alignment.TopStart)
-                    .width(140.dp)
-                    .height(31.dp)
+                    .width(101.dp)
+                    .height(23.dp)
                     .padding(start = 24.dp, bottom = 5.dp)
             )
             Divider (color = Color.White, modifier = Modifier
                 .height(1.dp)
-                .width(140.dp))
+                .width(103.dp))
             Text(text = context.getString(R.string.welcome), style = MaterialTheme.typography.h2, modifier = Modifier.padding(start = 24.dp, top = 50.dp))
             Text(text = context.getString(R.string.bio_eye_user), style = MaterialTheme.typography.h1,modifier = Modifier.padding(start = 24.dp, top = 5.dp))
-            Text(text = context.getString(R.string.small_demo), style = MaterialTheme.typography.body1, modifier = Modifier.padding(start = 24.dp, top = 5.dp, bottom = 50.dp))
+            Text(text = context.getString(R.string.small_demo), style = MaterialTheme.typography.body1, modifier = Modifier.padding(start = 24.dp, top = 5.dp, bottom = 80.dp))
             Button(
                 onClick = {
                     if (PERMISSION_GRANTED) {
@@ -168,11 +168,11 @@ fun MainContent(
                     else
                         Toast.makeText(context,  context.getString(R.string.permission_denied), Toast.LENGTH_SHORT ).show()
                    },
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(15.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier
-                    .width(354.dp)
-                    .height(88.dp)
+                    .width(265.dp)
+                    .height(65.dp)
                     .padding(start = 24.dp)) {
                 Text(text = context.getString(R.string.launch_face_detector), style = MaterialTheme.typography.button)
                 Image(

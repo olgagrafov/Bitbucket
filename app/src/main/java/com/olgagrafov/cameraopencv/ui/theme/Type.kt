@@ -19,52 +19,52 @@ val Typography = Typography(
     h1 = TextStyle(
         fontFamily = Nunitorans,
         fontWeight = FontWeight.W700,
-        fontSize = 53.sp,
+        fontSize = 40.sp,
         color = Color.White
     ),
     h2 = TextStyle(
         fontFamily = Nunitorans,
         fontWeight = FontWeight.W300,
-        fontSize = 32.sp,
+        fontSize = 24.sp,
         color = Color.White
     ),
     h3 = TextStyle(
         fontFamily = Nunitorans,
         fontWeight = FontWeight.W700,
-        fontSize = 21.sp,
+        fontSize = 16.sp,
         color = Color.White
     ),
     subtitle1 = TextStyle(
         fontFamily = Nunitorans,
         fontWeight = FontWeight.W700,
-        fontSize = 32.sp,
+        fontSize = 24.sp,
         color = Color.White,
         textAlign = TextAlign.Center
     ),
     subtitle2 = TextStyle(
         fontFamily = Nunitorans,
         fontWeight = FontWeight.W400,
-        fontSize = 24.sp,
+        fontSize = 18.sp,
         color = Color.White,
         textAlign = TextAlign.Center
     ),
     caption = TextStyle(
         fontFamily = Nunitorans,
         fontWeight = FontWeight.W700,
-        fontSize = 48.sp,
+        fontSize = 36.sp,
         color = Color.White,
         textAlign = TextAlign.Center
     ),
     body1 = TextStyle(
         fontFamily = Nunitorans,
         fontWeight = FontWeight.W300,
-        fontSize = 32.sp,
+        fontSize = 24.sp,
         color = Color(0xFF9E9E9E)
     ),
     button = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.W700,
-        fontSize = 24.sp,
+        fontSize = 18.sp,
         color = Color.Black
     ),
     /* Other default text styles to override

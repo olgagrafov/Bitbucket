@@ -74,9 +74,9 @@ fun CameraView(
                         onImageCaptured = onImageCaptured,
                         onError = onError
                 ) },
-                shape = RoundedCornerShape(33.dp),
+                shape = RoundedCornerShape(25.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-                modifier = Modifier.width(190.dp).height(88.dp).padding(bottom = 5.dp)
+                modifier = Modifier.width(143.dp).height(65.dp).padding(bottom = 5.dp)
             ) {
                 Text(
                     text = context.getString(R.string.done),

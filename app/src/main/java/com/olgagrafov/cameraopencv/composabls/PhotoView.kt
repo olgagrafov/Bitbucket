@@ -36,7 +36,7 @@ fun PhotoView(
         Image(
             painter =  painterResource(id = if (face.idDetected) R.drawable.face_detected else R.drawable.no_face),
             contentDescription = "",
-            modifier = Modifier.padding(top = 5.dp)
+            modifier = Modifier.padding(top = 24.dp, bottom = 5.dp)
         )
         Text(
             text =  if (face.idDetected) context.getString(R.string.detected) else  context.getString(R.string.no_face),
@@ -53,18 +53,15 @@ fun PhotoView(
             Image(
                 painter = painterResource(id = R.drawable.no_face),
                 contentDescription = null,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.width(360.dp).height(604.dp)//fillMaxSize()
             )
-
-
     }
-
-    Box(modifier = Modifier.fillMaxSize()) {
+  Box(modifier = Modifier.fillMaxSize()) {
         Button(
             onClick = { showSessionSummary() },
-            shape = RoundedCornerShape(33.dp),
+            shape = RoundedCornerShape(25.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
-            modifier = Modifier.width(190.dp).height(88.dp).align(Alignment.BottomCenter).padding(bottom = 5.dp)
+            modifier = Modifier.width(143.dp).height(65.dp).align(Alignment.BottomCenter).padding(bottom = 5.dp)
         ) {
             Text(
                 text = context.getString(R.string.done),

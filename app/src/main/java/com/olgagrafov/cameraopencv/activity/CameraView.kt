@@ -83,8 +83,8 @@ class CameraView : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background
                     ) {
-                        if (showSessionSummary)
-                            SessionSummary(this, sTotal, sDetected, sNoDetected)
+                        if (showSessionSummary || (!::imageBitmap.isInitialized))
+                           SessionSummary(this, sTotal, sDetected, sNoDetected)
                         else
                             PhotoView(
                                 photoBitmap = imageBitmap,

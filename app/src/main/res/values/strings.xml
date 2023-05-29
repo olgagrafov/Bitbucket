@@ -8,7 +8,7 @@
     <string name="small_demo">A Small Demo of our \nFace Recognition technology.</string>
     <string name="launch_face_detector">Launch Face Detector </string>
     <string name="permission_denied">Permission denied</string>
-    <string name="perform_test">Perform the test in a dimly lit room</string>
+    <string name="perform_test">Perform the test in a dimly \nlit room</string>
     <string name="adjust_lighting">Please adjust the lighting </string>
     <string name="try_again">Try Again</string>
     <string name="session_summary">Session Summary</string>
