@@ -30,7 +30,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class CameraView : ComponentActivity() {
+class CameraActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
     private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(true)
@@ -115,6 +115,7 @@ class CameraView : ComponentActivity() {
 
     private fun handleImageCapture(uri: Uri) {
         var bitmap: Bitmap? = createBit(this, uri)
+        Log.i("bit: ", bitmap.toString())
         bitmap?.let { convertBitmapToMat(it) }
 
 // TODO Send bitmap  to C++
@@ -122,6 +123,8 @@ class CameraView : ComponentActivity() {
         shouldShowCamera.value = false
 
     }
+
+    //TODO save CSV from C++
 
     private fun getOutputDirectory(): File {
         val downloadsDirectory = getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS)
@@ -159,7 +162,7 @@ class CameraView : ComponentActivity() {
     private fun convertBitmapToMat(bitmap: Bitmap) {
         val mat = Mat(bitmap.height, bitmap.width, CvType.CV_8UC1)
         Utils.bitmapToMat(bitmap, mat)
-       // Log.i(TAG, mat.elemSize().toString())
+        Log.i(TAG, mat.elemSize().toString())
     }
 
     override fun onDestroy() {

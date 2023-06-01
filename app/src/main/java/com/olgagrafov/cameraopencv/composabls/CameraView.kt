@@ -39,6 +39,7 @@ fun CameraView(
     onError: (ImageCaptureException) -> Unit
 ) {
 
+    val filenameFormat = "yyyy-MM-dd-HH-mm-ss-SSS"
     val lensFacing = CameraSelector.LENS_FACING_BACK
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -67,7 +68,7 @@ fun CameraView(
             Button(
                 onClick = {
                     takePhoto(
-                        filenameFormat = context.getString(R.string.filename_format),
+                        filenameFormat = filenameFormat,
                         imageCapture = imageCapture,
                         outputDirectory = outputDirectory,
                         executor = executor,
@@ -96,7 +97,7 @@ private fun takePhoto(
 ) {
     val photoFile = File(
         outputDirectory,
-        "bioeye-" + SimpleDateFormat(filenameFormat, Locale.US).format(System.currentTimeMillis()) + ".csv"
+        "bioeye-" + SimpleDateFormat(filenameFormat, Locale.US).format(System.currentTimeMillis()) + ".jpg"
     )
 
     val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()

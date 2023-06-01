@@ -1,4 +1,4 @@
-package com.olgagrafov.cameraopencv.service
+package com.olgagrafov.cameraopencv.sensors
 import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent

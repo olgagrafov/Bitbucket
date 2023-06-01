@@ -26,14 +26,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.olgagrafov.cameraopencv.R
 import com.olgagrafov.cameraopencv.composabls.AdjustLighting
-import com.olgagrafov.cameraopencv.service.LightSensor
+import com.olgagrafov.cameraopencv.sensors.LightSensor
 
 lateinit var lightSensor: LightSensor
-lateinit var TAG: String
+var TAG = "CAMERA_OPEN_CV"
 var MAIN_WINDOW = 1
 var LIGHT_WINDOW = 2
 var PERMISSION_GRANTED = false
-
 
 class MainActivity : ComponentActivity() {
 
@@ -43,7 +42,7 @@ class MainActivity : ComponentActivity() {
             // All permissions are granted
             PERMISSION_GRANTED = true
         } else {
-            Toast.makeText(this, "In order to use this application, you must grant all permissions", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.you_must_grant_permissions), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -51,8 +50,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         checkPermissions(this)
-
-        TAG = this.resources.getString(R.string.tag)
 
         lightSensor = LightSensor(this)//Server that check Lux Optimal range: 20-1000
 
@@ -171,7 +168,7 @@ fun MainContent(
 }
 
 private fun openCamera (context: Context) {
-    val myIntent = Intent(context, CameraView::class.java)
+    val myIntent = Intent(context, CameraActivity::class.java)
     context.startActivity(myIntent)
 }
 
