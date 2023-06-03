@@ -28,12 +28,11 @@ import com.olgagrafov.cameraopencv.R
 import com.olgagrafov.cameraopencv.composabls.AdjustLighting
 import com.olgagrafov.cameraopencv.sensors.LightSensor
 
-lateinit var lightSensor: LightSensor
+var lightSensor: LightSensor? = null
 var TAG = "CAMERA_OPEN_CV"
 var MAIN_WINDOW = 1
 var LIGHT_WINDOW = 2
 var PERMISSION_GRANTED = false
-
 class MainActivity : ComponentActivity() {
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -51,7 +50,8 @@ class MainActivity : ComponentActivity() {
 
         checkPermissions(this)
 
-        lightSensor = LightSensor(this)//Server that check Lux Optimal range: 20-1000
+        //Server that check Lux Optimal range: 20-1000
+        lightSensor = LightSensor(context = this)
 
         setContent {
             CameraOpenCVTheme {
@@ -78,17 +78,16 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        lightSensor.startListening()
+        lightSensor?.startListening()
     }
-
     override fun onPause() {
         super.onPause()
-        lightSensor.stopListening()
+        lightSensor?.stopListening()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        lightSensor.stopListening()
+        lightSensor?.stopListening()
     }
 
     private fun checkPermissions(context: Context) {
@@ -109,7 +108,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 }
 
 @Composable
@@ -142,14 +140,14 @@ fun MainContent(
             Button(
                 onClick = {
                     if (PERMISSION_GRANTED) {
-                        if (lightSensor.isLuxInRange())
+                        if (lightSensor!!.isLuxInRange())
                             openCamera(context)
                         else
                             windowSwitch.value = LIGHT_WINDOW
                     }
                     else
                         Toast.makeText(context, context.getString(R.string.permission_denied), Toast.LENGTH_SHORT ).show()
-                   },
+                },
                 shape = RoundedCornerShape(15.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier

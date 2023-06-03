@@ -10,7 +10,7 @@ import android.os.Environment.getExternalStoragePublicDirectory
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -29,13 +29,12 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-
 class CameraActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
     private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(true)
     private lateinit var imageBitmap: Bitmap
-
+    private val sensorValue = mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,20 +66,19 @@ class CameraActivity : ComponentActivity() {
         val sDetected = getString(R.string.detected).plus(": $det")
         val sNoDetected = getString(R.string.no_face).plus(": $noDet")
 
-
         setContent {
             var showSessionSummary by remember { mutableStateOf(false) }
 
-            CameraOpenCVTheme {
+           CameraOpenCVTheme {
                 if (shouldShowCamera.value) {
-                    //The first screen show camera
-                    CameraView(
-                        outputDirectory = outputDirectory,
-                        executor = cameraExecutor,
-                        onImageCaptured = ::handleImageCapture,
-                        onError = { Log.e(TAG, "View error:", it) }
-                    )
-                    startTimer()
+                        CameraView(
+                            outputDirectory = outputDirectory,
+                            executor = cameraExecutor,
+                            onImageCaptured = ::handleImageCapture,
+                            clickDone = ::handleDone,
+                            onError = { Log.e(TAG, "View error:", it) }
+                        )
+                       startTimer()
                 } else {
                     Surface(
                         modifier = Modifier.fillMaxSize(),
@@ -88,7 +86,7 @@ class CameraActivity : ComponentActivity() {
                     ) {
                         //The next Summary screen will be displayed if we get an image and click "done" or the camera closes after 0.5 minutes
                         if (showSessionSummary || (!::imageBitmap.isInitialized))
-                           SessionSummary(this, sTotal, sDetected, sNoDetected)
+                            SessionSummary(this, sTotal, sDetected, sNoDetected)
                         //The photo will be displayed on the photo screen if we make one
                         else
                             PhotoView(
@@ -110,7 +108,13 @@ class CameraActivity : ComponentActivity() {
         scope.launch {
             delay(30000)
             shouldShowCamera.value = false
+            handleDone()
         }
+    }
+
+    //As soon as the "Done" button is clicked or the timer ends, this fun will be launched
+    private fun handleDone() {
+        Log.i("lunch", "handleDone")
     }
 
     private fun handleImageCapture(uri: Uri) {

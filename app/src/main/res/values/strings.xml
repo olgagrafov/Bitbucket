@@ -17,4 +17,5 @@
     <string name="detected">Face Detected</string>
     <string name="no_face">No Face</string>
     <string name="done">DONE</string>
+    <string name="title_activity_camera_xactivity">CameraXActivity</string>
 </resources>

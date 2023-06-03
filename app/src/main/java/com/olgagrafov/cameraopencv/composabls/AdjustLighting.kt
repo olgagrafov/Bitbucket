@@ -32,9 +32,9 @@ fun AdjustLighting(
                 style = MaterialTheme.typography.subtitle1,
             )
             Text(
-               text = context.getString(R.string.adjust_lighting),
-               style = MaterialTheme.typography.subtitle2,
-               modifier = Modifier.padding(top = 24.dp, bottom = 70.dp)
+                text = context.getString(R.string.adjust_lighting),
+                style = MaterialTheme.typography.subtitle2,
+                modifier = Modifier.padding(top = 24.dp, bottom = 70.dp)
             )
             Image(
                 painter = painterResource(id = R.drawable.home),

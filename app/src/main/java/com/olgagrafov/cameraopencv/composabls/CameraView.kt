@@ -20,15 +20,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.content.ContextCompat
 import com.olgagrafov.cameraopencv.R
 import com.olgagrafov.cameraopencv.activity.TAG
+import com.olgagrafov.cameraopencv.provider.getCameraProvider
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
+import kotlin.reflect.KFunction0
 
 @SuppressLint("RememberReturnType")
 @Composable
@@ -36,11 +35,12 @@ fun CameraView(
     outputDirectory: File,
     executor: Executor,
     onImageCaptured: (Uri) -> Unit,
-    onError: (ImageCaptureException) -> Unit
+    onError: (ImageCaptureException) -> Unit,
+    clickDone: KFunction0<Unit>
 ) {
 
     val filenameFormat = "yyyy-MM-dd-HH-mm-ss-SSS"
-    val lensFacing = CameraSelector.LENS_FACING_BACK
+    val lensFacing = CameraSelector.LENS_FACING_FRONT//,DEFAULT_BACK_CAMERA , LENS_FACING_BACK
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
@@ -67,6 +67,7 @@ fun CameraView(
         AndroidView({ previewView }, modifier = Modifier.fillMaxSize())
             Button(
                 onClick = {
+                    clickDone()
                     takePhoto(
                         filenameFormat = filenameFormat,
                         imageCapture = imageCapture,
@@ -118,12 +119,3 @@ private fun takePhoto(
         }
     )
 }
-
-private suspend fun Context.getCameraProvider(): ProcessCameraProvider = suspendCoroutine { continuation ->
-    ProcessCameraProvider.getInstance(this).also { cameraProvider ->
-        cameraProvider.addListener({
-            continuation.resume(cameraProvider.get())
-        }, ContextCompat.getMainExecutor(this))
-    }
-}
-
