@@ -7,18 +7,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.olgagrafov.cameraopencv.activity.MAIN_WINDOW
 import com.olgagrafov.cameraopencv.R
 
 @Composable
 fun AdjustLighting(
     context: Context,
-    windowSwitch: MutableState<Int>
+    onTry: () -> Unit,
 ){
     Box(Modifier.fillMaxSize())
     {
@@ -48,7 +46,7 @@ fun AdjustLighting(
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = { windowSwitch.value = MAIN_WINDOW },
+                onClick = { onTry() },
                 shape = RoundedCornerShape(15.dp),
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
                 modifier = Modifier.width(265.dp).height(65.dp)

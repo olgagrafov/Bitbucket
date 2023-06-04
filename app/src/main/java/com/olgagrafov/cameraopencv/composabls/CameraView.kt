@@ -1,13 +1,11 @@
 package com.olgagrafov.cameraopencv.composabls
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,7 +36,6 @@ fun CameraView(
     onError: (ImageCaptureException) -> Unit,
     clickDone: KFunction0<Unit>
 ) {
-
     val filenameFormat = "yyyy-MM-dd-HH-mm-ss-SSS"
     val lensFacing = CameraSelector.LENS_FACING_FRONT//,DEFAULT_BACK_CAMERA , LENS_FACING_BACK
     val context = LocalContext.current
