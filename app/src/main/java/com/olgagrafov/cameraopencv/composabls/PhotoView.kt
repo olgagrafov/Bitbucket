@@ -14,17 +14,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.olgagrafov.cameraopencv.R
-import com.olgagrafov.cameraopencv.model.Face
 
 @Composable
 fun PhotoView(
     photoBitmap: Bitmap,
-    face: Face,
     context: Context,
-    showSessionSummary: () -> Unit
+    painter: Painter,
+    color: Color,
+    text: String,
+    onDone: () -> Unit
 ) {
     val bt = photoBitmap.asImageBitmap()
 
@@ -34,13 +36,13 @@ fun PhotoView(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter =  painterResource(id = if (face.idDetected) R.drawable.face_detected else R.drawable.no_face),
+            painter =  painter,
             contentDescription = "",
             modifier = Modifier.padding(top = 24.dp, bottom = 5.dp)
         )
         Text(
-            text =  if (face.idDetected) context.getString(R.string.detected) else  context.getString(R.string.no_face),
-            color = if (face.idDetected) Color(red = 51, green = 211, blue = 123) else Color(red = 255, green = 106, blue = 124),
+            text =  text,
+            color = color,
             style = MaterialTheme.typography.caption,
         )
         if(bt != null)
@@ -58,7 +60,7 @@ fun PhotoView(
     }
   Box(modifier = Modifier.fillMaxSize()) {
         Button(
-            onClick = { showSessionSummary() },
+            onClick = { onDone( )},
             shape = RoundedCornerShape(25.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
             modifier = Modifier.width(143.dp).height(65.dp).align(Alignment.BottomCenter).padding(bottom = 5.dp)

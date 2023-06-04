@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import com.olgagrafov.cameraopencv.R
 import com.olgagrafov.cameraopencv.composabls.CameraView
 import com.olgagrafov.cameraopencv.composabls.PhotoView
@@ -34,7 +36,6 @@ class CameraActivity : ComponentActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(true)
     private lateinit var imageBitmap: Bitmap
-    private val sensorValue = mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,9 +92,12 @@ class CameraActivity : ComponentActivity() {
                         else
                             PhotoView(
                                 photoBitmap = imageBitmap,
-                                face = falseFace,
-                                context = this
+                                context = this,
+                                painter =  painterResource(id = if (face.idDetected) R.drawable.face_detected else R.drawable.no_face),
+                                color = if (face.idDetected) Color(red = 51, green = 211, blue = 123) else Color(red = 255, green = 106, blue = 124),
+                                text =  if (face.idDetected) getString(R.string.detected) else  getString(R.string.no_face)
                             ) { showSessionSummary = true }
+
                     }
                 }
             }
