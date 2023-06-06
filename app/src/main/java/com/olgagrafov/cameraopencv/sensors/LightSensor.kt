@@ -35,6 +35,6 @@ class LightSensor (context: Context) {
     }
 
     fun isLuxInRange(): Boolean{
-        return true//luxValue in 20f..1000f
+        return luxValue in 20f..1000f
     }
 }

@@ -30,12 +30,14 @@ import java.io.FileNotFoundException
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import coil.compose.rememberImagePainter
 
 class CameraActivity : ComponentActivity() {
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
     private var shouldShowCamera: MutableState<Boolean> = mutableStateOf(true)
     private lateinit var imageBitmap: Bitmap
+    private lateinit var photoUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +93,7 @@ class CameraActivity : ComponentActivity() {
                         //The photo will be displayed on the photo screen if we make one
                         else
                             PhotoView(
-                                photoBitmap = imageBitmap,
+                                photoPainter = rememberImagePainter(photoUri),
                                 context = this,
                                 painter =  painterResource(id = if (face.idDetected) R.drawable.face_detected else R.drawable.no_face),
                                 color = if (face.idDetected) Color(red = 51, green = 211, blue = 123) else Color(red = 255, green = 106, blue = 124),
@@ -122,6 +124,7 @@ class CameraActivity : ComponentActivity() {
     }
 
     private fun handleImageCapture(uri: Uri) {
+        photoUri = uri
         var bitmap: Bitmap? = createBit(this, uri)
         Log.i("bit: ", bitmap.toString())
         bitmap?.let { convertBitmapToMat(it) }

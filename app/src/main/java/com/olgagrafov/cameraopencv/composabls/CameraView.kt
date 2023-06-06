@@ -25,7 +25,6 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
-import kotlin.reflect.KFunction0
 
 @SuppressLint("RememberReturnType")
 @Composable
@@ -34,7 +33,7 @@ fun CameraView(
     executor: Executor,
     onImageCaptured: (Uri) -> Unit,
     onError: (ImageCaptureException) -> Unit,
-    clickDone: KFunction0<Unit>
+    clickDone: () -> Unit
 ) {
     val filenameFormat = "yyyy-MM-dd-HH-mm-ss-SSS"
     val lensFacing = CameraSelector.LENS_FACING_FRONT//,DEFAULT_BACK_CAMERA , LENS_FACING_BACK
